@@ -1,11 +1,13 @@
 package com.epam.izh.rd.online.repository;
 
+import java.io.IOException;
+
 public interface FileRepository {
 
 
     long countFilesInDirectory(String path);
 
-    long countDirsInDirectory(String path);
+    long countDirsInDirectory(String path) throws IOException;
 
     void copyTXTFiles(String from, String to);
 

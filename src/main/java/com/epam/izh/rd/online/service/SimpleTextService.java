@@ -13,7 +13,12 @@ public class SimpleTextService implements TextService {
      */
     @Override
     public String removeString(String base, String remove) {
-        return null; //TODO
+        String[] str = base.split(remove);
+        StringBuilder ans = new StringBuilder();
+        for (int i = 0; i < str.length; i++) {
+            ans.append(str[i]);
+        }
+        return ans.toString();
     }
 
     /**
@@ -24,7 +29,7 @@ public class SimpleTextService implements TextService {
      */
     @Override
     public boolean isQuestionString(String text) {
-        return false; //TODO
+        return text.endsWith("?");
     }
 
     /**
@@ -35,7 +40,11 @@ public class SimpleTextService implements TextService {
      */
     @Override
     public String concatenate(String... elements) {
-        return null; //TODO
+        StringBuilder ans = new StringBuilder();
+        for (int i = 0; i < elements.length; i++) {
+            ans.append(elements[i]);
+        }
+        return ans.toString();
     }
 
     /**
@@ -47,7 +56,20 @@ public class SimpleTextService implements TextService {
      */
     @Override
     public String toJumpCase(String text) {
-        return null; //TODO
+        String lowText = text.toLowerCase();
+        String upText = text.toUpperCase();
+
+        StringBuilder ans = new StringBuilder();
+
+        for (int i = 0; i < text.length(); i++) {
+            if (i % 2 == 0) {
+                ans.append(lowText.charAt(i));
+            } else {
+                ans.append(upText.charAt(i));
+            }
+        }
+
+        return ans.toString();
     }
 
     /**
@@ -59,6 +81,17 @@ public class SimpleTextService implements TextService {
      */
     @Override
     public boolean isPalindrome(String string) {
-       return false; //TODO
+       boolean polindrome = true;
+
+       String text = string.toLowerCase().replace(" ", "");
+       if (text.length() == 0) {
+           return false;
+       }
+       for (int i = 0; i < text.length(); i++) {
+           if (text.charAt(i) != text.charAt(text.length() - 1 - i)) {
+               polindrome = false;
+           }
+       }
+       return polindrome;
     }
 }

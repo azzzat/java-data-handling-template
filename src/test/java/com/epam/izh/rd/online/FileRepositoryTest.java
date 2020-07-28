@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,7 +37,7 @@ public class FileRepositoryTest {
 
     @Test
     @DisplayName("Тест метода FileRepository.countDirsInDirectory(String path)")
-    void testCountDirsInDirectory() {
+    void testCountDirsInDirectory() throws IOException, NullPointerException {
         assertEquals(7, fileRepository.countDirsInDirectory(TEST_DIR_COUNT_PATH));
     }
 

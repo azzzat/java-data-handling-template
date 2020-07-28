@@ -14,7 +14,8 @@ public class SimpleDateService implements DateService {
      */
     @Override
     public String parseDate(LocalDate localDate) {
-        return null;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return dtf.format(localDate);
     }
 
     /**
@@ -25,7 +26,9 @@ public class SimpleDateService implements DateService {
      */
     @Override
     public LocalDateTime parseString(String string) {
-        return null;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime date = LocalDateTime.parse(string, dtf);
+        return date;
     }
 
     /**
@@ -37,7 +40,7 @@ public class SimpleDateService implements DateService {
      */
     @Override
     public String convertToCustomFormat(LocalDate localDate, DateTimeFormatter formatter) {
-        return null;
+        return formatter.format(localDate);
     }
 
     /**
@@ -47,7 +50,24 @@ public class SimpleDateService implements DateService {
      */
     @Override
     public long getNextLeapYear() {
-        return 0;
+        long ld = LocalDate.now().getYear();
+        boolean isLeap = false;
+
+        while (!isLeap) {
+            if (ld % 100 == 0 && ld % 400 == 0) {
+                isLeap = true;
+                break;
+            } else if (ld % 4 == 0 && ld % 100 != 0) {
+                isLeap = true;
+                break;
+            } else if (ld % 100 == 0) {
+                isLeap = true;
+                break;
+            }
+            ld++;
+        }
+
+        return ld;
     }
 
     /**
@@ -57,7 +77,22 @@ public class SimpleDateService implements DateService {
      */
     @Override
     public long getSecondsInYear(int year) {
-        return 0;
+        long sec;
+        boolean isLeap = false;
+        if (year % 100 == 0 && year % 400 == 0) {
+            isLeap = true;
+        } else if (year % 4 == 0 && year % 100 != 0) {
+            isLeap = true;
+        } else if (year % 100 == 0) {
+            isLeap = true;
+        }
+        if (isLeap) {
+            sec = 86400 * 366;
+        } else {
+            sec = 86400 * 365;
+        }
+
+        return sec;
     }
 
 
